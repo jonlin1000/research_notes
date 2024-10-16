@@ -1,0 +1,27 @@
+\documentclass[14pt]{memoir}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{accents}
+\pagestyle{fancy}
+\setlength{\headheight}{40pt}
+\usepackage[style=alphabetic]{biblatex}
+\addbibresource{biblio.bib}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newenvironment{solution}
+  {\renewcommand\qedsymbol{$\blacksquare$}
+  \begin{proof}[Solution]}
+  {\end{proof}}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+\renewcommand{\div}{\operatorname{div}}
+
+\newcommand{\ubar}[1]{\underaccent{\bar}{#1}}

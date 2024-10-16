@@ -1,0 +1,235 @@
+\input{settings} % add packages, settings, and declarations in settings.tex
+
+\begin{document}
+
+\lhead{Remarks}
+\rhead{\today} 
+\cfoot{\thepage\ of \pageref{LastPage}}
+
+\chapter{Preliminaries 1: Fluid Equations}
+
+Some references for the preliminaries are incompressible flow and high Reynolds numbers by Majda and Bertozzi and the book by Bedrossian and Vicol. These preliminaries are also vaguely structured around a set of lectures on Youtube that Theo Drivas gave for the Simons center.
+
+
+\section{The Main Equations of Motion}
+Usually, we only work in $\mathbb{R}^2$ or $\mathbb{R}^3$. For $\nu \geq 0$ solutions to the following system of PDE
+\begin{gather}
+    v_t + (v \cdot \nabla)v = -\nabla p + \nu \Delta v \\
+    \div v = 0
+\end{gather}
+are called incompressible flows of homogeneous fluids. $v$ is a vector field that is divergence free. ``Incompressible'' is synonymous with the divergence free condition. (something about conservation of mass) $p$ is a scalar called the pressure. Essentially the pressure is a Lagrange multiplier which enforces the divergence free constraint. The constant $\nu$ is often called the kinematic viscosity. When $\nu = 0$ these equations are referred to as \textbf{Euler's Equations} and when $\nu > 0$ they are referred to as the \textbf{Navier-Stokes Equations}.
+
+When it comes to the Euler equation, we can consider the following possible setups:
+\begin{itemize}
+    \item Initial data $v(\cdot, 0) = v_0$
+    \item Periodic boundary conditions, ie the solution lives in the flat torus $\mathbb{T}^d$.
+    \item No penetration boundary conditions if we are solving for $v$ and $p$ in a domain $D$:
+    \[v \cdot n = 0.\]
+\end{itemize}
+
+The view of a fluid in terms of its velocity field is called \textit{Eulerian}. There is another interpretation called the \textit{Lagrangian} interpretation, which is given by a parametrized family $\Phi_t: \mathbb{R}^n \to \mathbb{R}^n$ where $\Phi_t(x)$ describes the position of a particle, originally at the point $x$, at the time $t$. The link between Eulerian and Lagrangian viewpoints is the IVP
+
+\[ 
+\begin{aligned}
+\frac{d}{dt}\Phi_t(x) &= v(\Phi_t(x), t) \\
+\Phi_0(x) &= x.
+\end{aligned}
+\]
+
+This equation describes the velocity vector of a streamline $\Phi_t(x)$. To describe the acceleration vector we differentiate this equality with respect to $t$ and by chain rule we get
+\[\begin{aligned}
+    \frac{d^2}{dt^2}\Phi_t(x) &= \left(\partial_jv(\Phi_t(x), t)\cdot \frac{d}{dt}\Phi_t(x)\right)_{j = 1}^{2,3} + v_t(\Phi_t(x), t) \\
+    &= v \cdot \nabla v + v_t \\
+    &= -\nabla p
+\end{aligned}\]
+
+We can interpret this as Newton's second law $ma = F$ where $-\nabla p$ describes the force vector and $m = 1$ is given because the equations enforce a constant density.
+
+\section{Conservation Laws of Fluid Equations}
+
+
+
+\section{Rotation and Deformation of Fluid}
+
+Now we analyze smooth divergence free vector fields $v$ and extract important quantities called the \textit{vorticity} $\omega$ and the \textit{deformation/strain matrix} $\mathcal{D}$. If $v$ is a smooth divergence free vector field, we may write using Taylor's theorem
+\[v(x_0 + h, t_0) = v(x_0, t_0) + (\nabla v)(x_0, t_0)h + O(|h|^2)\]
+where $\nabla v$ is a square matrix since $v$ is a vector field. Any matrix $A$ can be written $A = D + F$, where $D$ is a symmetric matrix and $F$ is an anti-symmetric matrix. In particular, we can write $\nabla v = \mathcal{D} + \Omega$, where
+\begin{equation}
+    \mathcal{D} = \frac{1}{2}(\nabla v + \nabla v^t)
+\end{equation}
+and 
+\begin{equation}
+    \Omega = \frac{1}{2}(\nabla v - \nabla v^t)
+\end{equation}
+
+\chapter{Global Regularity of Vortex Patches}
+
+\section{Cat Eyes and Shear Flows}
+
+postponed as someone else is thinking about this at the moment.
+
+\chapter{Singularity Formation in Incompressible Fluids}
+
+\section{Foundational Results}
+
+\subsection{Local Existence in $H^s$}
+
+\chapter{Quantitative Nadirashvili-Hamel}
+
+\section{Summary of the idea}
+
+In the paper ``Shear flows of an ideal fluid and elliptic equations in unbounded domains'' (2019) Nadirashvili and Hamel prove the following result:
+
+\begin{theorem}
+    Let $\Omega_2 = \mathbb{R} \times (0, 1)$. If $v$ is a steady solution of 2d Euler where $v^2(x, \pm 1) = 0$ and $\inf_{\Omega_2}|v| > 0$. Then $v$ is a shear flow
+    \[v(x, y) = (w(y), 0).\]
+\end{theorem}
+
+To prove this amounts to proving that for the stream function $\psi$ there exists a Lipschitz $F$ such that 
+\[\Delta \psi = F(\psi), \psi|_{y = 1} = c, \psi|_{y = 0} = 0.\] Indeed for a steady solution $u$ to Euler we have
+\begin{align*}
+    u \cdot \nabla u &= -\nabla p \\
+    \nabla \cdot u &= 0
+\end{align*}
+
+which implies that 
+\[u \cdot \nabla \omega = \nabla^{\perp}\psi \cdot \nabla \omega = 0\]
+This equation implies that $\omega$ is constant on the streamlines $\{\psi = c\}$, so that $\omega = F(\psi)$ for some function $F$. The argument that $\omega$ and $\psi$ share the same level sets is a modification of the argument that the gradient is always normal to level sets. basically we reverse engineer the fact that 
+\[0 = (\omega \circ \gamma)'(p) = (\psi \circ \gamma)'(p)\]
+where $\gamma$ is a path on the level set of $\psi$ (or $\omega$, if you want).
+
+Theo, Yannick, and Dan considered the following perturbative modification of the problem: suppose the boundaries $y = 1$ and $y = 0$ are replaced by arbitrary functions $f_1^\epsilon$ and $1 + f_2^\epsilon$.
+
+Then in terms of these two functions, how far do the streamlines of a steady Euler solution deviate from flat curvature?
+
+according to Theo the right estimate is something like
+\[k(\{\psi = c\}) \lesssim (\text{some function of})(||f_1^\epsilon||, ||f_2^\epsilon||)\]
+if we can get a good estimate like this then we may have another proof of the result by Nadirashvili and Hamel.
+
+\section{Summary of Nadirashvili-Hamel (2017)}
+
+In this section we will pretty much always be considering stationary incompressible 2D Euler 
+\[\begin{cases}
+    v \cdot \nabla v = -\nabla p & \\
+    \nabla \cdot v = 0 & 
+\end{cases}\]
+
+Then NH proves the following rigidity results for a strip $\Omega_2$ and a half plane $\Omega_1$.
+
+\begin{theorem}
+    On $\overline{\Omega_2}$ where $v$ is tangential to the boundary and $\inf_{\Omega_2}|v| > 0$, it must be the case that $v$ is a shear flow
+    \[v(x) = (v^1(x_2), 0)\]
+\end{theorem}
+A few simple examples in NH show that this assumption is necessary.
+
+\begin{theorem}
+    On $\Omega_1$, if $v$ is tangential to the boundary line and $0 < \inf_{\Omega_1}|v| \leq \sup_{\Omega_1}|v| < \infty$, then the same conclusion holds.
+\end{theorem}
+The idea of the proof is to show that the streamlines of $v$ are all horizontal lines. To do this they reduce stationary Euler to an elliptic problem $\Delta u = f(u)$ and for $\Omega_2$ they prove the following theorem:
+
+\begin{theorem}
+    Suppose in $\Omega_2$ 
+    \[\Delta u + f(u) = 0\] where $u \in \mathcal{C}^2(\overline{\Omega_2}) \cap L^\infty(\Omega_2)$ where $f$ is continuous local Lipschitz and $u$ takes the boundary data $0$ on $x_2 = 0$ and $c$ for $x_2 = 1$ and $0 < u < c$ in $\Omega_2$. Then
+    \[u(x_1, x_2) = \Tilde{u}(x_2)\] with $\Tilde{u}'(x_2) > 0$ for $x_2 \in (0, 1)$.
+\end{theorem}
+
+\section{Basic approach of Nadirashvili-Hamel in the case of the half space}
+
+One can think of this case as the "infinite depth" case. To prove the main theorem they use sliding and results from papers of FV10 and BCN97 on rigidity of semilinear elliptic equations.
+
+The first point, of course, is that the stream function $\psi$ satisfies some semilinear elliptic equation
+\[\Delta \psi + F(\psi) = 0\]
+where $F$ is a locally Lipschitz function, $u \equiv 0$ on $\{y = 0\}$ and $u > 0$ on $\{y > 0\}$. Now for any $A > 0$, on $\mathbb{R} \times [0, A]$ our function $\psi$ satisfies
+\[\Delta \psi + f_A(\psi) = 0\]
+for some globally lipschitz $f_A$. Now we apply a result in BCN97 to conclude that $\psi_{x_2} > 0$ on $\mathbb{R} \times (0, A/2)$ and hence on all of $\mathbb{R}^2_+$. Then a result in FV10 or even BCN97 tells us that $u$ only depends on the second variable, as desired. This result is proven in BCN97 by sliding/moving planes and in FV10 by some geometric argument (?).
+
+We'd like to adapt this approach to the case where the domain is some epigraph. Then there are some unused results in FV10 that potentially could be cited.
+
+\section{Application to Free Boundary Euler (TD, DG, YS)}
+
+In the free boundary infinite depth case the stream function $\psi$ satisfies the following properties:
+\[\begin{cases} \Delta \psi + f(\psi) = 0 & \text{in $\Omega$} \\ 
+\partial_\nu\psi = c \neq 0 & \text{on $\{x_2 = \eta\}$} \\ 
+\psi \equiv 0 & \text{on $\{x_2 = \eta\}$} \\
+\psi > 0 & \text{on $\Omega$}
+\end{cases}\]
+which is all the assumptions needed to invoke Theorem 1.2 in \cite{FV10} except the monotonicity assumption $\partial_2u(x) > 0$ for all $x \in \Omega$. To show this we might need to use the sliding method.
+
+In the paper by Berestycki and Nirenberg about this problem in the case of a Lipschitz epigraph the following theorem and comment might be useful: If we consider the case of a coercive Lipschitz epigraph
+\[\lim_{|x'| \to \infty}\phi(x') = \infty\]
+then we can show the monotonicity. The reason that they cite is that for any $\lambda$ the region $\Omega_\lambda = \Omega \cap \{y < \lambda\}$ is bounded. Then we can apply a previous result of them when the region is a bounded one.
+
+\section{Overdetermined Elliptic Problems}
+
+For this project it is important to understand precisely the literature on problems of this type.
+
+First we summarize the results found in \cite{RSW23}. Here $\psi \in \mathcal{C}^3(\Omega)$ always solves
+\[\begin{cases} \Delta \psi + f(\psi) = 0 & \text{in $\Omega$} \\ 
+\partial_\nu\psi = c_0 \neq 0 & \text{on $\partial \Omega$} \\ 
+\psi \equiv 0 & \text{on $\partial \Omega$} \\
+\psi > 0 & \text{on $\Omega$.}
+\end{cases}\]
+\begin{theorem}
+    If $\psi$ is bounded, with $f \in \mathcal{C}^1$ with a non-positive primitive $F$ of $f$ (ie $F' = f$) such that 
+    \[c_0^2 + 2F(0) \geq 0\]
+    then either $H(p) < 0$ for any $p \in \partial \Omega$ or $\Omega$ is a half space and $\psi$ is one dimensional.
+\end{theorem}
+
+The following theorems are proven via ``Modica''-type estimates which are summarized below. In both cases we have 
+\[P(x) = |\nabla u(x)|^2 + 2F(u(x)).\]
+
+\begin{theorem}
+    Suppose $F$, $\psi$, and $P$ are defined as above. Then
+    \[P(x) \leq \max(0, c_0^2 + 2F(0))\]
+    for all $x \in \Omega$. Moreover, if there is a point where equality occurs then $P$ is constant, $\psi$ is one dimensional and $\Omega$ is a half space.
+\end{theorem}
+
+\begin{theorem}
+    If $c_0 \neq 0$ and 
+    \[P(x) \leq c_0^2 + 2F(0)\]
+    then the mean curvature $H(p) \leq 0$ for any $p \in \partial \Omega$. If $H(p) = 0$ for any point $p$ we have one dimensional rigidity similar to the previous theorem.
+\end{theorem}
+
+Actually there is a paper \cite{RRS17} that totally settles the infinite depth free boundary case. It proves the following:
+\begin{theorem}
+    Let $\Omega \subset \mathbb{R}^2$ a $\mathcal{C}^{1,\alpha}$ domain whose boundary is unbounded and connected. Assume that there exists a solution $u$ to the overdetermined problem
+    \[\begin{cases}
+        \Delta u + f(u) = 0 & \text{in $\Omega$} \\
+        u > 0 & \text{in $\Omega$} \\
+        u = 0 & \text{on $\partial \Omega$} \\
+        \frac{du}{d\nu} = 1 & \text{on $\partial \Omega$}
+    \end{cases}\]
+    where $f$ is non-negative and locally Lipschitz. Then $\Omega$ is a half plane and $u$ is parallel.
+    
+\end{theorem}
+
+
+
+\chapter{Appendices}
+\section{Appendix A: Basic computations in Riemannian Geometry}
+
+\subsection{Vector Fields and their Integral Curves}
+
+\subsection{Index Raising and Lowering}
+
+For this discussion we will fix any Riemannian manifold $X$ and vector fields $X$ and $Y$ in $\mathcal{X}(M)$. Given these objects we may define a kind of dual map $\hat{g}: TM \to T^*M$ defined by
+\[[\hat{g}(X)](Y) = g(X, Y).\] Without the use of coordinates we can see that $\hat{g}$ is a bijective correspondance. For instance, if $\hat{g}(X) = 0$, ie, the zero linear map, then 
+\[0 = \hat{g}(X)(X) = g(X, X)\] which implies that $X \equiv 0$. This means $\hat{g}$ is one to one. To prove surjectivity suppose $\eta \in T^*M$. This means for any smooth vector field $X$ $\eta(X) \in \mathcal{C}^\infty(M)$. We want to find a smooth vector field $Y$ such that $\eta(X) = g(Y, X)$. At least if we look at the pointwise level it is clear we can choose a vector field $Y$. since, pointwise at a point $p$ it amounts to finding $y_p \in T_pM$ where
+\[g_p(y, x) = \eta_p(x)\]
+and this is always possible due to the finite dimension RRT. The only question is whether $Y$ is in fact smooth. Since smoothness is a local condition it suffices to check this at a point $p$. So locally at a point $p$ we may express the metric $g = (g_{ij})$, $g^{-1} = (g^{ij})$ which are smooth functions and we may express $Y = \sum Y_i \partial_i$. Then for each $1 \leq j \leq n$
+\[g(Y, \partial_j) = \sum_i g_{ji}Y_i = f_j \in \mathcal{C}^{\infty}(M)\] by assumption. But since $g$ is invertible we may express 
+\[Y_j = \sum_{i}g^{ji}f_i\]
+and now it is clear that $Y$ is smooth as desired.
+
+\begin{remark}
+    A similar kind of argument is used to show that we can identify $(0, 1)$ tensor fields with one forms. Indeed, the map from the latter to the former is
+    \[\omega \mapsto (X \mapsto \omega(X)).\]
+
+    Like the above case, the injectivity is clear because if $\omega(X) = 0$ for all $X$ then $\omega \equiv 0$ (this is just a matter of linear algebra). The other way is pretty much a matter of definitions as well: since for $\eta \in T^{0,1}M$ defines at each point a linear functional of the tangent space at that point. This one form is automatically smooth just due to how $T^{0,1}M$ specifies that $\eta(X)$ should be smooth for all smooth vector fields $X$.
+
+    When we identify $(1, 0)$ forms with vector fields the most difficult part is when we have a vector field $X$ where $\theta(X)$ is smooth for all smooth one forms $\theta$. Then to conclude that $X$ is smooth the easiest way is to pass to coordinates.
+\end{remark}
+
+\printbibliography
+
+\end{document}
