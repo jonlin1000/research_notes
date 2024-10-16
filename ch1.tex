@@ -1,0 +1,53 @@
+Some references for the preliminaries are incompressible flow and high Reynolds numbers by Majda and Bertozzi and the book by Bedrossian and Vicol. These preliminaries are also vaguely structured around a set of lectures on Youtube that Theo Drivas gave for the Simons center.
+
+
+\section{The Main Equations of Motion}
+Usually, we only work in $\mathbb{R}^2$ or $\mathbb{R}^3$. For $\nu \geq 0$ solutions to the following system of PDE
+\begin{gather}
+    v_t + (v \cdot \nabla)v = -\nabla p + \nu \Delta v \\
+    \div v = 0
+\end{gather}
+are called incompressible flows of homogeneous fluids. $v$ is a vector field that is divergence free. ``Incompressible'' is synonymous with the divergence free condition. (something about conservation of mass) $p$ is a scalar called the pressure. Essentially the pressure is a Lagrange multiplier which enforces the divergence free constraint. The constant $\nu$ is often called the kinematic viscosity. When $\nu = 0$ these equations are referred to as \textbf{Euler's Equations} and when $\nu > 0$ they are referred to as the \textbf{Navier-Stokes Equations}.
+
+When it comes to the Euler equation, we can consider the following possible setups:
+\begin{itemize}
+    \item Initial data $v(\cdot, 0) = v_0$
+    \item Periodic boundary conditions, ie the solution lives in the flat torus $\mathbb{T}^d$.
+    \item No penetration boundary conditions if we are solving for $v$ and $p$ in a domain $D$:
+    \[v \cdot n = 0.\]
+\end{itemize}
+
+The view of a fluid in terms of its velocity field is called \textit{Eulerian}. There is another interpretation called the \textit{Lagrangian} interpretation, which is given by a parametrized family $\Phi_t: \mathbb{R}^n \to \mathbb{R}^n$ where $\Phi_t(x)$ describes the position of a particle, originally at the point $x$, at the time $t$. The link between Eulerian and Lagrangian viewpoints is the IVP
+
+\[ 
+\begin{aligned}
+\frac{d}{dt}\Phi_t(x) &= v(\Phi_t(x), t) \\
+\Phi_0(x) &= x.
+\end{aligned}
+\]
+
+This equation describes the velocity vector of a streamline $\Phi_t(x)$. To describe the acceleration vector we differentiate this equality with respect to $t$ and by chain rule we get
+\[\begin{aligned}
+    \frac{d^2}{dt^2}\Phi_t(x) &= \left(\partial_jv(\Phi_t(x), t)\cdot \frac{d}{dt}\Phi_t(x)\right)_{j = 1}^{2,3} + v_t(\Phi_t(x), t) \\
+    &= v \cdot \nabla v + v_t \\
+    &= -\nabla p
+\end{aligned}\]
+
+We can interpret this as Newton's second law $ma = F$ where $-\nabla p$ describes the force vector and $m = 1$ is given because the equations enforce a constant density.
+
+\section{Conservation Laws of Fluid Equations}
+
+
+
+\section{Rotation and Deformation of Fluid}
+
+Now we analyze smooth divergence free vector fields $v$ and extract important quantities called the \textit{vorticity} $\omega$ and the \textit{deformation/strain matrix} $\mathcal{D}$. If $v$ is a smooth divergence free vector field, we may write using Taylor's theorem
+\[v(x_0 + h, t_0) = v(x_0, t_0) + (\nabla v)(x_0, t_0)h + O(|h|^2)\]
+where $\nabla v$ is a square matrix since $v$ is a vector field. Any matrix $A$ can be written $A = D + F$, where $D$ is a symmetric matrix and $F$ is an anti-symmetric matrix. In particular, we can write $\nabla v = \mathcal{D} + \Omega$, where
+\begin{equation}
+    \mathcal{D} = \frac{1}{2}(\nabla v + \nabla v^t)
+\end{equation}
+and 
+\begin{equation}
+    \Omega = \frac{1}{2}(\nabla v - \nabla v^t)
+\end{equation}
