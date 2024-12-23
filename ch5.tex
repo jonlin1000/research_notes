@@ -1,0 +1,168 @@
+\section{Summary of the idea}
+
+In the paper ``Shear flows of an ideal fluid and elliptic equations in unbounded domains'' (2019) Nadirashvili and Hamel prove the following result:
+
+\begin{theorem}
+    Let $\Omega_2 = \mathbb{R} \times (0, 1)$. If $v$ is a steady solution of 2d Euler where $v^2(x, \pm 1) = 0$ and $\inf_{\Omega_2}|v| > 0$. Then $v$ is a shear flow
+    \[v(x, y) = (w(y), 0).\]
+\end{theorem}
+
+To prove this amounts to proving that for the stream function $\psi$ there exists a Lipschitz $F$ such that 
+\[\Delta \psi = F(\psi), \psi|_{y = 1} = c, \psi|_{y = 0} = 0.\] Indeed for a steady solution $u$ to Euler we have
+\begin{align*}
+    u \cdot \nabla u &= -\nabla p \\
+    \nabla \cdot u &= 0
+\end{align*}
+
+which implies that 
+\[u \cdot \nabla \omega = \nabla^{\perp}\psi \cdot \nabla \omega = 0\]
+This equation implies that $\omega$ is constant on the streamlines $\{\psi = c\}$, so that $\omega = F(\psi)$ for some function $F$. The argument that $\omega$ and $\psi$ share the same level sets is a modification of the argument that the gradient is always normal to level sets. basically we reverse engineer the fact that 
+\[0 = (\omega \circ \gamma)'(p) = (\psi \circ \gamma)'(p)\]
+where $\gamma$ is a path on the level set of $\psi$ (or $\omega$, if you want).
+
+Theo, Yannick, and Dan considered the following perturbative modification of the problem: suppose the boundaries $y = 1$ and $y = 0$ are replaced by arbitrary functions $f_1^\epsilon$ and $1 + f_2^\epsilon$.
+
+Then in terms of these two functions, how far do the streamlines of a steady Euler solution deviate from flat curvature?
+
+according to Theo the right estimate is something like
+\[k(\{\psi = c\}) \lesssim (\text{some function of})(||f_1^\epsilon||, ||f_2^\epsilon||)\]
+if we can get a good estimate like this then we may have another proof of the result by Nadirashvili and Hamel.
+
+\section{Summary of Nadirashvili-Hamel (2017)}
+
+In this section we will pretty much always be considering stationary incompressible 2D Euler 
+\[\begin{cases}
+    v \cdot \nabla v = -\nabla p & \\
+    \nabla \cdot v = 0 & 
+\end{cases}\]
+
+Then NH proves the following rigidity results for a strip $\Omega_2$ and a half plane $\Omega_1$.
+
+\begin{theorem}
+    On $\overline{\Omega_2}$ where $v$ is tangential to the boundary and $\inf_{\Omega_2}|v| > 0$, it must be the case that $v$ is a shear flow
+    \[v(x) = (v^1(x_2), 0)\]
+\end{theorem}
+A few simple examples in NH show that this assumption is necessary.
+
+\begin{theorem}
+    On $\Omega_1$, if $v$ is tangential to the boundary line and $0 < \inf_{\Omega_1}|v| \leq \sup_{\Omega_1}|v| < \infty$, then the same conclusion holds.
+\end{theorem}
+The idea of the proof is to show that the streamlines of $v$ are all horizontal lines. To do this they reduce stationary Euler to an elliptic problem $\Delta u = f(u)$ and for $\Omega_2$ they prove the following theorem:
+
+\begin{theorem}
+    Suppose in $\Omega_2$ 
+    \[\Delta u + f(u) = 0\] where $u \in \mathcal{C}^2(\overline{\Omega_2}) \cap L^\infty(\Omega_2)$ where $f$ is continuous local Lipschitz and $u$ takes the boundary data $0$ on $x_2 = 0$ and $c$ for $x_2 = 1$ and $0 < u < c$ in $\Omega_2$. Then
+    \[u(x_1, x_2) = \Tilde{u}(x_2)\] with $\Tilde{u}'(x_2) > 0$ for $x_2 \in (0, 1)$.
+\end{theorem}
+
+\section{Basic approach of Nadirashvili-Hamel in the case of the half space}
+
+One can think of this case as the "infinite depth" case. To prove the main theorem they use sliding and results from papers of FV10 and BCN97 on rigidity of semilinear elliptic equations.
+
+The first point, of course, is that the stream function $\psi$ satisfies some semilinear elliptic equation
+\[\Delta \psi + F(\psi) = 0\]
+where $F$ is a locally Lipschitz function, $u \equiv 0$ on $\{y = 0\}$ and $u > 0$ on $\{y > 0\}$. Now for any $A > 0$, on $\mathbb{R} \times [0, A]$ our function $\psi$ satisfies
+\[\Delta \psi + f_A(\psi) = 0\]
+for some globally lipschitz $f_A$. Now we apply a result in BCN97 to conclude that $\psi_{x_2} > 0$ on $\mathbb{R} \times (0, A/2)$ and hence on all of $\mathbb{R}^2_+$. Then a result in FV10 or even BCN97 tells us that $u$ only depends on the second variable, as desired. This result is proven in BCN97 by sliding/moving planes and in FV10 by some geometric argument (?).
+
+We'd like to adapt this approach to the case where the domain is some epigraph. Then there are some unused results in FV10 that potentially could be cited.
+
+\section{Application to Free Boundary Euler (TD, DG, YS)}
+
+In the free boundary infinite depth case the stream function $\psi$ satisfies the following properties:
+\[\begin{cases} \Delta \psi + f(\psi) = 0 & \text{in $\Omega$} \\ 
+\partial_\nu\psi = c \neq 0 & \text{on $\{x_2 = \eta\}$} \\ 
+\psi \equiv 0 & \text{on $\{x_2 = \eta\}$} \\
+\psi > 0 & \text{on $\Omega$}
+\end{cases}\]
+which is all the assumptions needed to invoke Theorem 1.2 in \cite{FV10} except the monotonicity assumption $\partial_2u(x) > 0$ for all $x \in \Omega$. To show this we might need to use the sliding method.
+
+In the paper by Berestycki and Nirenberg about this problem in the case of a Lipschitz epigraph the following theorem and comment might be useful: If we consider the case of a coercive Lipschitz epigraph
+\[\lim_{|x'| \to \infty}\phi(x') = \infty\]
+then we can show the monotonicity. The reason that they cite is that for any $\lambda$ the region $\Omega_\lambda = \Omega \cap \{y < \lambda\}$ is bounded. Then we can apply a previous result of them when the region is a bounded one.
+
+\section{Overdetermined Elliptic Problems}
+
+For this project it is important to understand precisely the literature on problems of this type.
+
+First we summarize the results found in \cite{RSW23}. Here $\psi \in \mathcal{C}^3(\Omega)$ always solves
+\[\begin{cases} \Delta \psi + f(\psi) = 0 & \text{in $\Omega$} \\ 
+\partial_\nu\psi = c_0 \neq 0 & \text{on $\partial \Omega$} \\ 
+\psi \equiv 0 & \text{on $\partial \Omega$} \\
+\psi > 0 & \text{on $\Omega$.}
+\end{cases}\]
+\begin{theorem}
+    If $\psi$ is bounded, with $f \in \mathcal{C}^1$ with a non-positive primitive $F$ of $f$ (ie $F' = f$) such that 
+    \[c_0^2 + 2F(0) \geq 0\]
+    then either $H(p) < 0$ for any $p \in \partial \Omega$ or $\Omega$ is a half space and $\psi$ is one dimensional.
+\end{theorem}
+
+The following theorems are proven via ``Modica''-type estimates which are summarized below. In both cases we have 
+\[P(x) = |\nabla u(x)|^2 + 2F(u(x)).\]
+
+\begin{theorem}
+    Suppose $F$, $\psi$, and $P$ are defined as above. Then
+    \[P(x) \leq \max(0, c_0^2 + 2F(0))\]
+    for all $x \in \Omega$. Moreover, if there is a point where equality occurs then $P$ is constant, $\psi$ is one dimensional and $\Omega$ is a half space.
+\end{theorem}
+
+\begin{theorem}
+    If $c_0 \neq 0$ and 
+    \[P(x) \leq c_0^2 + 2F(0)\]
+    then the mean curvature $H(p) \leq 0$ for any $p \in \partial \Omega$. If $H(p) = 0$ for any point $p$ we have one dimensional rigidity similar to the previous theorem.
+\end{theorem}
+
+Actually there is a paper \cite{RRS17} that totally settles the infinite depth free boundary case. It proves the following:
+\begin{theorem}
+    Let $\Omega \subset \mathbb{R}^2$ a $\mathcal{C}^{1,\alpha}$ domain whose boundary is unbounded and connected. Assume that there exists a solution $u$ to the overdetermined problem
+    \[\begin{cases}
+        \Delta u + f(u) = 0 & \text{in $\Omega$} \\
+        u > 0 & \text{in $\Omega$} \\
+        u = 0 & \text{on $\partial \Omega$} \\
+        \frac{du}{d\nu} = 1 & \text{on $\partial \Omega$}
+    \end{cases}\]
+    where $f$ is non-negative and locally Lipschitz. Then $\Omega$ is a half plane and $u$ is parallel.
+\end{theorem}
+
+\section{Partially Overdetermined Elliptic Problems}
+
+This section is dedicated to understanding Theorem 6 of \cite{FV13}:
+
+\begin{theorem}
+    Suppose $c \neq 0$ and $\Omega \subset \mathbb{R}^n$ is a connected and $\mathcal{C}^1$ domain. Suppose $\Gamma \subset \partial \Omega$ is non-empty and open in the natural topology of $\partial \Omega$, with exterior normal $\nu$.
+
+    Suppose $f$ is locally Lipschitz and $u \in C^2(\Omega) \cap C^1(\overline{\Omega})$ solves
+    \[
+        \begin{cases}
+            \Delta u + f(u) = 0 & \text{in $\Omega$} \\
+            u = 0 & \text{on $\partial \Omega$} \\
+            \partial_\nu u = c & \text{on $\Gamma$.}
+        \end{cases}
+    \]
+    If $\Gamma$ agrees with a portion of the hyperplane $\{x_n = 0\}$, then $\Omega$ is a half plane or a slab, and $u$ is planar.
+\end{theorem}  
+
+In other words, this theorem asserts the following. Suppose $u$ solves a ``partially overdetermined'' elliptic problem. It's partially overdetermined on the region $\Gamma$ where it satisfies both Dirichlet and Neumann boundary conditions. Moreover, this region $\Gamma$ is flat.
+
+The theorem asserts that the only way this can happen is if the original domain $\Omega$ is a slab. At a very, very rough level the proof involves proving that $u$ agrees with a solution $u^*$ with planar symmetry.
+
+\subsection{Understanding the Topological Arguments}
+
+By some sort of unique continuation argument, $u$ agrees with some symmetrical solution $u^*$. This tells us that the connected component of $\Gamma$ agrees with $\{x_n = 0\}$. This also tells us that the level sets of $u$ have planar symmetry. Since the boundary $\partial \Omega$ is a disjoint union of the component level sets of $u$ it follows that $\partial \Omega$ is contained on non-accumulating parallel hyperplanes. They are non-accumulating because the function $u^*$ does not accumulate at any values.
+
+Conversely any connected component of $\partial \Omega$ is a hyperplane. Indeed, if $C$ is such a component, it is clopen in $\partial \Omega$. $C$ is contained in some hyperplane $\Pi$, and so in particular it must be the whole hyperplane $\Pi$.
+
+\subsection{The function $u^*$}
+Let's try to understand how the function $u^*$ is constructed. Suppose for a second that $\Omega = \{x_n < 0\}$ and $u$ was horizontal. This means that $u(x) = u_*(x_n)$ for some one dimensional function $u_*$. This function would satisfy
+\[
+\begin{cases}
+    u_*''(r) = -f(u_*(r)) & \text{in $(-\infty, 0)$} \\
+    u_*(0) = 0 & \\
+    u_*'(0) = c.
+\end{cases}
+\]
+
+\subsection{Theorem 2 and Theorem 1 in \cite{FV13}}
+
+The first two theorems in \cite{FV13} are the two key results used in Theorem 6. Essentially, less broadly than stated before, the strategy to prove Theorem 6 is as follows: First Theorem 2 is applied. Essentially what this theorem does is given the partial overdetermined boundary data, it concludes that in fact the connected component containing $\Gamma$ is $\{x_n = 0\}$ and in fact the partially overdetermination is fully overdetermined on this hyperplane. In particular, we can use the unique continuation result of Theorem 1, which tells us that since $u$ and $u_*$ agree Dirichlet and Neumann on a portion of the boundary they agree everywhere on the interior. 
+
