@@ -1,0 +1,16 @@
+\section{Formulation of the Equations}
+
+We recall the basic formulation of the 2D water wave problem. The basic form of the equations can be seen for instance in \cite{CS04}, and differences in the literature are usually a result of different competing effects (surface tension, gravity, etc). Here is the formulation with surface tension and gravity added. In an undisturbed state, the equation of the free surface of the wave is $y = 0$, and if the wave is specified to have finite depth the bottom is given by $y = -d$ for some $d > 0$. In the presence of a wave we denote the free surface by $y = \eta(t, x)$ and we denote the velocity field by $u = (u_1, u_2)$. Assuming that the fluid is constant density we come up with the following system for the equations of motion:
+
+\begin{align}\label{eeb}
+u\cdot \nabla u &= -\nabla (p +g x_2),\qquad \text{in} \quad \Omega\\
+\nabla \cdot u &= 0,\qquad\qquad\quad\quad \   \ \ \text{in} \quad \Omega\\ \label{eefree}
+u_1 \partial_1\eta& = u_2, \qquad\qquad\quad\quad \  \    \text{on} \quad \Gamma \\ 
+p& = \sigma H,\qquad\qquad\quad\ \ \  \   \text{on} \quad \Gamma\\
+u_2& = 0, \qquad\qquad\quad\quad \   \ \ \text{on} \quad \{x_2=-h\}.\label{eef}
+\end{align}
+The domain is $\Omega=\{(x_1,x_2) \ : \ x_1\in \Omega^0, \ \ x_2\in (-h,\eta(\cdot))\}$ where we have taken the atmospheric pressure of the air to be zero and denoted the mean curvature of the free surface by $H$,
+\[
+H= -\frac{\partial_1^2 \eta}{ (1+|\partial_1 \eta|^2)^{3/2}}.
+\]
+The free surface is given by a global graph $\Gamma=\left \{ (x_1,\eta(x_1)),\,\,x_1\in \Omega^0 \right \}$ where $\Omega^0$ is either $\mathbb T$ or $\mathbb R$.

@@ -166,3 +166,23 @@ Let's try to understand how the function $u^*$ is constructed. Suppose for a sec
 
 The first two theorems in \cite{FV13} are the two key results used in Theorem 6. Essentially, less broadly than stated before, the strategy to prove Theorem 6 is as follows: First Theorem 2 is applied. Essentially what this theorem does is given the partial overdetermined boundary data, it concludes that in fact the connected component containing $\Gamma$ is $\{x_n = 0\}$ and in fact the partially overdetermination is fully overdetermined on this hyperplane. In particular, we can use the unique continuation result of Theorem 1, which tells us that since $u$ and $u_*$ agree Dirichlet and Neumann on a portion of the boundary they agree everywhere on the interior. 
 
+\section{Curvature Arguments: Finding the right estimate to prove}
+
+The problem with adapting \cite{FV13} for our purposes is that the proof of Theorem 2 essentially relies on the unique continuation theorem of Theorem 1 in that paper. This is to my knowledge not shown in a quantitative way (they cite Hormander 1 and 2. Do you know how big those books are??)
+
+To simplify the problem let's consider this water wave problem with infinite depth, provided we take into account gravity and surface tension. Let's even restrict ourselves (for the moment) to irrotational (vorticity $0$) flows. We know for sure that the stream function will satisfy the following properties:
+\[
+\begin{cases}
+    \Delta \psi = 0 & \text{in $\Omega$} \\
+    \psi \equiv 0 & \text{on $\partial \Omega$} \\
+    (\partial_\nu\psi)^2 = Q(0) + gx_2 - \sigma H & \text{on $\partial \Omega$}
+\end{cases}
+\]
+
+In particular if we want to prove a rigidity estimate, we need to control the curvature of the streamlines $\mathcal{K}$ with the curvature of the boundary. Given the famous example of periodic capillary waves, we know that there needs to be some restriction on the nature of the free boundary or else the theorem won't be true. In particular there is an infinite family of waves due to Crapper which gives a certain counterexample.
+
+\begin{itemize}
+    \item What we want to control: the curvature $K$ of the boundary $\{\psi = 0\}$
+    \item Somehow we need to control this by the normal derivative. The boundedness is not enough as Crapper waves show. We need some kind of vanishing of the normal derivative at $\infty$.
+    \item to capture the decay we probably need some kind of sequence of functions; limited to dimension 2 they should probably have some kind of inverse log growth.
+\end{itemize}

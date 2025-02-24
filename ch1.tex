@@ -1,10 +1,10 @@
-Some references for the preliminaries are incompressible flow and high Reynolds numbers by Majda and Bertozzi and the book by Bedrossian and Vicol. These preliminaries are also vaguely structured around a set of lectures on Youtube that Theo Drivas gave for the Simons center.
+Some references for the preliminaries are incompressible flow and high Reynolds numbers by Majda and Bertozzi and the book by Bedrossian and Vicol. An ultimate reference for the preliminaries for fluids are the lecture notes by V. Sverak, where I pulled a lot of comments and observations. Another reference that can be noted on the interface between the PDE and the experimental observations are given by the notes of Eyink on turbulence theory.
 
 
 \section{The Main Equations of Motion}
 Usually, we only work in $\mathbb{R}^2$ or $\mathbb{R}^3$. For $\nu \geq 0$ solutions to the following system of PDE
 \begin{gather}
-    v_t + (v \cdot \nabla)v = -\nabla p + \nu \Delta v \\
+    v_t + (v \cdot \nabla)v = -\nabla p + \nu \Delta v\label{ns} \\
     \div v = 0
 \end{gather}
 are called incompressible flows of homogeneous fluids. $v$ is a vector field that is divergence free. ``Incompressible'' is synonymous with the divergence free condition. (something about conservation of mass) $p$ is a scalar called the pressure. Essentially the pressure is a Lagrange multiplier which enforces the divergence free constraint. The constant $\nu$ is often called the kinematic viscosity. When $\nu = 0$ these equations are referred to as \textbf{Euler's Equations} and when $\nu > 0$ they are referred to as the \textbf{Navier-Stokes Equations}.
@@ -33,15 +33,54 @@ This equation describes the velocity vector of a streamline $\Phi_t(x)$. To desc
     &= -\nabla p
 \end{aligned}\]
 
-We can interpret this as Newton's second law $ma = F$ where $-\nabla p$ describes the force vector and $m = 1$ is given because the equations enforce a constant density.
+We can interpret this as Newton's second law $ma = F$ where $-\nabla p$ describes the force vector and $m = 1$ is given because the equations prescribe a fluid with constant density.
 
-\section{Conservation Laws of Fluid Equations}
+The pressure $p$ can be solved in terms of the velocity vector $v$. In particular, if we take the divergence of the vector equation in Euler, we get the equation
+\[-\Delta p = \nabla \cdot (u \cdot \nabla u) = \partial_ju_i \partial_i u_j\]
+We may solve for $p$ by convolving it with the Newtonian potential (in the case of the whole space) or a suitable Green function (in the case when the domain has boundary). In the latter case there needs to be suitable boundary conditions in order to solve for the pressure in this way and in the former case there needs to be certain decay assumptions on $u$ (see Bedrossian and Vicol for the details).
 
+Since we may solve for the pressure as a certain convolution of the velocity components this makes the Euler equations \textbf{non-local}.
 
+\section{The Vorticity Formulation of Fluid Equations}
 
-\section{Rotation and Deformation of Fluid}
+\begin{definition}
+    Given a vector field $u$ in $\mathbb{R}^3$, the vorticity $\omega$ is given by the curl $\nabla \times u$. In index notation,
+    \[\omega_k = (\nabla \times u)_k = \epsilon_{ijk}\partial_iu_j\]
+    where $\epsilon_{ijk}$ is the sign of the permutation $(ijk)$. For instance $\epsilon_{123} = 1$, $\epsilon_{132} = -1$, etc.
+\end{definition}
 
-Now we analyze smooth divergence free vector fields $v$ and extract important quantities called the \textit{vorticity} $\omega$ and the \textit{deformation/strain matrix} $\mathcal{D}$. If $v$ is a smooth divergence free vector field, we may write using Taylor's theorem
+The vorticity gives some quantitative meaning to the axis and strength of a fluid's local rotation. Now we will rewrite fluid equation (\ref{ns}) in terms of the vorticity. First we observe that 
+\[v \times \omega = \nabla(|v|^2/2) - v \cdot \nabla v.\]
+Indeed, if we write the left hand side in coordinates we observe that 
+\begin{align}
+    (v \times \omega)_i &= \epsilon_{ijk}v_j\omega_k \\
+    &= \epsilon_{ijk}v_j \cdot \epsilon_{lmk}\partial_lv_m \\
+    &= (\epsilon_{ijk}\epsilon_{lmk})v_j\partial_lv_m.
+\end{align}
+Now consider the term $\epsilon_{ijk}\epsilon_{lmk}$. It is non-zero precisely when $ijk$ and $lmk$ are pairwise distinct and zero otherwise. In particular, the product is $1$ if $i = l$, $j = m$ and $-1$ if $i = m$ and $j = l$. This means that this term is equal to $\delta_{il}\delta_{jm} - \delta_{im}\delta_{jl}$ where $\delta_{ij}$ is the Kronecker delta function. In particular, we simplify the above to
+\[v_j\partial_iv_j - v_j\partial_jv_i = (\nabla(|v|^2/2) - v\cdot \nabla v)_i\]
+as desired.
+
+In particular, we may rewrite the fluid equation (\ref{ns}) as
+\begin{equation}
+    \partial_t v = (v \times \omega) - \nabla p' + \nu\Delta v \label{pvns}
+\end{equation}
+where $p' = p + \frac{1}{2}|v|^2$. Now using an identity about the curl of a cross product and the incompressibility condition $\div v = 0$ we have
+\[\nabla \times (v \times \omega) = (\omega \cdot \nabla)v - (v \cdot \nabla)\omega\]
+So when we take the curl of (\ref{pvns}) we obtain the vorticity formulation of the Euler equations
+\begin{equation}
+    \partial_t \omega + (v \cdot \nabla)\omega = (\omega \cdot \nabla)v + \nu \Delta \omega. \label{vns}
+\end{equation}
+
+As a particular case of this equation consider a 2 dimensional flow $v = (v_1(x, y), v_2(x, y), 0)$. Then the vorticity is $\omega = (0, 0, \nabla^\perp\cdot(v_1, v_2))$ where $\nabla^\perp = (-\partial_y, \partial_x)$. In particular $\omega \cdot \nabla v = 0$. So the equation reduces in this case to
+\begin{equation}
+    \partial_t\omega + (v \cdot \nabla)\omega = \nu \Delta \omega \label{2dvns}
+\end{equation}
+Notice that this can be viewed as a one dimensional equation, identifying $\omega$ with its third component.
+
+\subsection{Rotation and Deformation of Fluid}
+
+Now we analyze smooth divergence free vector fields $v$ and decompose them into important quantities involving the \textit{vorticity} $\omega$ and the \textit{deformation/strain matrix} $\mathcal{D}$. If $v$ is a smooth divergence free vector field, we may write using Taylor's theorem
 \[v(x_0 + h, t_0) = v(x_0, t_0) + (\nabla v)(x_0, t_0)h + O(|h|^2)\]
 where $\nabla v$ is a square matrix since $v$ is a vector field. Any matrix $A$ can be written $A = D + F$, where $D$ is a symmetric matrix and $F$ is an anti-symmetric matrix. In particular, we can write $\nabla v = \mathcal{D} + \Omega$, where
 \begin{equation}
@@ -51,3 +90,26 @@ and
 \begin{equation}
     \Omega = \frac{1}{2}(\nabla v - \nabla v^t)
 \end{equation}
+
+\section{Conservation Laws of Fluid Equations}
+
+\subsection{Kelvin's Theorem}
+Recall that the circulation around a curve $C$ is given by the line integral
+\begin{equation}
+    \Gamma_C = \int_C u \cdot d\ell. \label{circulation}
+\end{equation}
+For any such closed curve $C$ and any fluid flow $v$ where $\nu = 0$ define $C(t) = \Phi_t(C)$. Kelvin's theorem says that 
+\begin{equation} 
+\frac{d}{dt}\Gamma_{C(t)} = 0, \label{kelvin}
+\end{equation}
+that is to say the circulation of any closed curve is constant as it is deformed by the fluid flow over time.
+
+\begin{remark}
+    By Stokes' theorem, this is equivalent to vorticity flux conservation
+    \[\frac{d}{dt} \int_{A(t)} \omega dS = 0\]
+    where $A(t)$ is a surface with boundary $C(t)$.
+\end{remark}
+
+\begin{remark}
+    It turns out that in the class of sufficiently smooth vector fields $v$ the property (\ref{kelvin}) characterizes Euler solutions. (source?)
+\end{remark}
